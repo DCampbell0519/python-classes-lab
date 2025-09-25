@@ -37,7 +37,18 @@ class Game():
         Game.print_message(self)
     
     def place_piece(self):
-        
+        move = input(f'Enter a valid move (example: A1): ').lower()
+        while True:
+            print(move)
+            if ('a' or 'b' or 'c') and ('1' or '2' or '3') in move:
+                print('Cowabunga!')
+                break
+            else: 
+                print('Fuck you, try again.')
+                print(move)
+                break
+
+
 
 tic_tac_toe = Game()
 # tic_tac_toe.play_game()
@@ -48,3 +59,4 @@ tic_tac_toe = Game()
 # print(tic_tac_toe.tie)
 # tic_tac_toe.print_message()
 tic_tac_toe.render()
+tic_tac_toe.place_piece()
