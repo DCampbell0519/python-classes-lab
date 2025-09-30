@@ -9,8 +9,7 @@ class Game():
             'a3': None, 'b3': None, 'c3': None,
         }
     
-    def play_game(self):
-        print('I love me some tic-tac-toe!')
+    
 
     def print_board(self):
         board = self.board
@@ -32,31 +31,44 @@ class Game():
             print(f'It\'s player {self.turn}\'s turn!')
 
     def render(self):
-        Game.play_game(self)
         Game.print_board(self)
         Game.print_message(self)
     
     def place_piece(self):
         move = input(f'Enter a valid move (example: A1): ').lower()
         while True:
-            print(move)
-            if ('a' or 'b' or 'c') and ('1' or '2' or '3') in move:
+            if move[0] in ('a', 'b', 'c') and move[1] in ('1', '2', '3') and self.board[move] is None:
                 print('Cowabunga!')
+                self.board[move] = self.turn
+                # self.render()
                 break
             else: 
                 print('Fuck you, try again.')
-                print(move)
-                break
+                
 
+    def switch_turns(self):
+        if self.winner:
+            return
+        if self.turn == 'X':
+            self.turn = 'O'
+        elif self.turn =='O':
+            self.turn = 'X'
+
+    def play_game(self):
+        print('I love me some tic-tac-toe!')
+        while not self.winner and not self.tie:
+            self.render()
+            self.place_piece()
+            self.switch_turns()
 
 
 tic_tac_toe = Game()
-# tic_tac_toe.play_game()
+tic_tac_toe.play_game()
 # tic_tac_toe.print_board()
 # tic_tac_toe.winner = 'X'
 # tic_tac_toe.tie = True
 # print(tic_tac_toe.winner)
 # print(tic_tac_toe.tie)
 # tic_tac_toe.print_message()
-tic_tac_toe.render()
-tic_tac_toe.place_piece()
+# tic_tac_toe.render()
+# tic_tac_toe.place_piece()
