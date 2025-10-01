@@ -21,6 +21,9 @@ class Game():
                 ----------
             3)  {board['a3'] or ' '} | {board['b3'] or ' '} | {board['c3'] or ' '}
         """)
+        # print('=================')
+        # print(self.board.values())
+        # print('=================')
     
     def print_message(self):
         if self.tie:
@@ -59,8 +62,12 @@ class Game():
         if self.board['a1'] and (self.board['a1'] == self.board['b1'] == self.board['c1']) or self.board['a2'] and (self.board['a2'] == self.board['b2'] == self.board['c2']) or self.board['a3'] and (self.board['a3'] == self.board['b3'] == self.board['c3']) or self.board['a1'] and (self.board['a1'] == self.board['b2'] == self.board['c3']) or self.board['a3'] and (self.board['a3'] == self.board['b2'] == self.board['c1']) or self.board['a1'] and (self.board['a1'] == self.board['a2'] == self.board['a3']) or self.board['b1'] and (self.board['b1'] == self.board['b2'] == self.board['b3']) or self.board['c1'] and (self.board['c1'] == self.board['c2'] == self.board['c3']):
 
             self.winner = self.turn
-            self.print_message()
+            # self.print_message()
             # print('The winner is:', self.winner)
+    
+    def check_for_tie(self):
+        if all(value is not None for value in self.board.values()) and not self.winner:
+            self.tie = True
 
     def play_game(self):
         print('I love me some tic-tac-toe!')
@@ -68,6 +75,7 @@ class Game():
             self.render()
             self.place_piece()
             self.check_for_winner()
+            self.check_for_tie()
             if self.winner or self.tie:
                 self.render()
             else:
