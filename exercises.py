@@ -43,11 +43,13 @@ class Game():
             if move[0] in ('a', 'b', 'c') and move[1] in ('1', '2', '3') and self.board[move] is None:
                 print('Cowabunga!')
                 self.board[move] = self.turn
-                # self.render()
+                # valid_move = True
+                # return valid_move
                 break
             else: 
                 print('Fuck you, try again.')
                 break
+        # return move 
                 
 
     def switch_turns(self):
@@ -70,6 +72,7 @@ class Game():
             self.tie = True
 
     def play_game(self):
+        valid_move = self.place_piece()
         print('I love me some tic-tac-toe!')
         while not self.winner and not self.tie:
             self.render()
@@ -80,6 +83,10 @@ class Game():
                 self.render()
             else:
                 self.switch_turns()
+            # if valid_move:
+            #     self.switch_turns()
+            # if self.place_piece():
+            #     self.switch_turns()
 
     
 
