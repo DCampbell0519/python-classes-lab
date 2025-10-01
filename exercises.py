@@ -44,6 +44,7 @@ class Game():
                 break
             else: 
                 print('Fuck you, try again.')
+                break
                 
 
     def switch_turns(self):
@@ -54,12 +55,25 @@ class Game():
         elif self.turn =='O':
             self.turn = 'X'
 
+    def check_for_winner(self):
+        if self.board['a1'] and (self.board['a1'] == self.board['b1'] == self.board['c1']) or self.board['a2'] and (self.board['a2'] == self.board['b2'] == self.board['c2']) or self.board['a3'] and (self.board['a3'] == self.board['b3'] == self.board['c3']) or self.board['a1'] and (self.board['a1'] == self.board['b2'] == self.board['c3']) or self.board['a3'] and (self.board['a3'] == self.board['b2'] == self.board['c1']) or self.board['a1'] and (self.board['a1'] == self.board['a2'] == self.board['a3']) or self.board['b1'] and (self.board['b1'] == self.board['b2'] == self.board['b3']) or self.board['c1'] and (self.board['c1'] == self.board['c2'] == self.board['c3']):
+
+            self.winner = self.turn
+            self.print_message()
+            # print('The winner is:', self.winner)
+
     def play_game(self):
         print('I love me some tic-tac-toe!')
         while not self.winner and not self.tie:
             self.render()
             self.place_piece()
-            self.switch_turns()
+            self.check_for_winner()
+            if self.winner or self.tie:
+                self.render()
+            else:
+                self.switch_turns()
+
+    
 
 
 tic_tac_toe = Game()
