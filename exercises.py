@@ -9,8 +9,6 @@ class Game():
             'a3': None, 'b3': None, 'c3': None,
         }
     
-    
-
     def print_board(self):
         board = self.board
         print(f"""
@@ -21,9 +19,6 @@ class Game():
                 ----------
             3)  {board['a3'] or ' '} | {board['b3'] or ' '} | {board['c3'] or ' '}
         """)
-        # print('=================')
-        # print(self.board.values())
-        # print('=================')
     
     def print_message(self):
         if self.tie:
@@ -38,19 +33,16 @@ class Game():
         Game.print_message(self)
     
     def place_piece(self):
-        move = input(f'Enter a valid move (example: A1): ').lower()
         while True:
+            move = input(f'Enter a valid move (example: A1): ').lower()
             if move[0] in ('a', 'b', 'c') and move[1] in ('1', '2', '3') and self.board[move] is None:
                 print('Cowabunga!')
                 self.board[move] = self.turn
-                # valid_move = True
-                # return valid_move
+                self.switch_turns()
                 break
             else: 
-                print('Fuck you, try again.')
-                break
-        # return move 
-                
+                print('Shell shocked!  Invalid move you goober.  Try again.')
+                self.print_message()
 
     def switch_turns(self):
         if self.winner:
@@ -62,17 +54,13 @@ class Game():
 
     def check_for_winner(self):
         if self.board['a1'] and (self.board['a1'] == self.board['b1'] == self.board['c1']) or self.board['a2'] and (self.board['a2'] == self.board['b2'] == self.board['c2']) or self.board['a3'] and (self.board['a3'] == self.board['b3'] == self.board['c3']) or self.board['a1'] and (self.board['a1'] == self.board['b2'] == self.board['c3']) or self.board['a3'] and (self.board['a3'] == self.board['b2'] == self.board['c1']) or self.board['a1'] and (self.board['a1'] == self.board['a2'] == self.board['a3']) or self.board['b1'] and (self.board['b1'] == self.board['b2'] == self.board['b3']) or self.board['c1'] and (self.board['c1'] == self.board['c2'] == self.board['c3']):
-
             self.winner = self.turn
-            # self.print_message()
-            # print('The winner is:', self.winner)
     
     def check_for_tie(self):
         if all(value is not None for value in self.board.values()) and not self.winner:
             self.tie = True
 
     def play_game(self):
-        valid_move = self.place_piece()
         print('I love me some tic-tac-toe!')
         while not self.winner and not self.tie:
             self.render()
@@ -81,23 +69,7 @@ class Game():
             self.check_for_tie()
             if self.winner or self.tie:
                 self.render()
-            else:
-                self.switch_turns()
-            # if valid_move:
-            #     self.switch_turns()
-            # if self.place_piece():
-            #     self.switch_turns()
-
-    
-
 
 tic_tac_toe = Game()
 tic_tac_toe.play_game()
-# tic_tac_toe.print_board()
-# tic_tac_toe.winner = 'X'
-# tic_tac_toe.tie = True
-# print(tic_tac_toe.winner)
-# print(tic_tac_toe.tie)
-# tic_tac_toe.print_message()
-# tic_tac_toe.render()
-# tic_tac_toe.place_piece()
+
